@@ -58,11 +58,17 @@ class MainActivity : AppCompatActivity() {
             cScore?.text="10"
             current=10
             Toast.makeText(applicationContext,"Correct!!",Toast.LENGTH_LONG).show()
-            movieNo++
-            hint?.text = movieList[movieNo].hints[currhintno]
-            hintList = movieList[movieNo].hints
-            hintno=0
-            name?.text=""
+            if(movieNo<movieList.size) {
+                movieNo++
+                hint?.text = movieList[movieNo].hints[currhintno]
+                hintList = movieList[movieNo].hints
+                hintno = 0
+                name?.text = ""
+            }
+            else{
+                Toast.makeText(applicationContext,"You are true winner!! Have a nice Day.",
+                        Toast.LENGTH_LONG).show()
+            }
         }
         else{
             Toast.makeText(applicationContext,"Wrong!!",Toast.LENGTH_LONG).show()
