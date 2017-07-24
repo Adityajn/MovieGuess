@@ -9,6 +9,7 @@ import android.widget.Toast
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
+import java.util.*
 
 data class Movie(
         val country: String,
@@ -52,17 +53,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onCheckClicked(){
+        if(movieNo>=movieList.size) {
+            Toast.makeText(applicationContext,"You are true winner!! Have a nice Day.",
+                    Toast.LENGTH_LONG).show()
+            return
+        }
         if(movieList[movieNo].name.toLowerCase() == name?.text.toString()){
             tScore?.text=(total+current).toString()
             total+=current
             cScore?.text="10"
             current=10
             Toast.makeText(applicationContext,"Correct!!",Toast.LENGTH_LONG).show()
+            movieNo++
             if(movieNo<movieList.size) {
-                movieNo++
+                currhintno=0
+                hintno = 0
                 hint?.text = movieList[movieNo].hints[currhintno]
                 hintList = movieList[movieNo].hints
-                hintno = 0
                 name?.text = ""
             }
             else{
@@ -126,6 +133,7 @@ class MainActivity : AppCompatActivity() {
             list.add(movie)
             i++
         }
+        Collections.shuffle(list)
         return list
     }
 
